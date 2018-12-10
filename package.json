@@ -1,0 +1,23 @@
+{
+  "name": "zway-lock-mqtt",
+  "version": "0.0.1",
+  "description": "MQTT API for lock control of Z-Wave lock using a ZWay controller",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denwilliams/zway-lock-mqtt.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denwilliams/zway-lock-mqtt/issues"
+  },
+  "homepage": "https://github.com/denwilliams/zway-lock-mqtt#readme",
+  "dependencies": {
+    "mqtt-usvc": "^1.0.6",
+    "node-zway": "^0.2.3"
+  }
+}

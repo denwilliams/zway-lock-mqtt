@@ -1,0 +1,12 @@
+  mqtt:
+    uri: "mqtt://localhost"
+    prefix: "zwaylock/"
+    subscriptions:
+      - "zwaylock/set/#"
+  service:
+    host: "homenet-zway"
+    user: "admin"
+    password: "mypassword"
+    devices: 
+      - 2
+      - 8
