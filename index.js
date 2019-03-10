@@ -9,10 +9,18 @@ const zway = require("./zway").create(service.config);
 
 zway.onAlarm(details => {
   service.send("status/" + details.device + "/alarm", details);
+  service.send(
+    "status/" + details.device + "/alarm/" + details.alarmType,
+    details
+  );
 });
 
 zway.onMode(details => {
   service.send("status/" + details.device + "/mode", {
+    data: details.value,
+    locked: Boolean(details.value)
+  });
+  service.send("status/" + details.device + "/mode/" + details.value, {
     data: details.value,
     locked: Boolean(details.value)
   });
