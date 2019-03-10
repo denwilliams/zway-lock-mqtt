@@ -8,22 +8,22 @@ const service = mqttusvc.create({
 const zway = require("./zway").create(service.config);
 
 zway.onAlarm(details => {
-  service.send("status/" + details.device + "/alarm", details);
+  const payload = Object.assign(details, { timestamp: new Date() });
+  service.send("status/" + details.device + "/alarm", payload);
   service.send(
     "status/" + details.device + "/alarm/" + details.alarmType,
-    details
+    payload
   );
 });
 
 zway.onMode(details => {
-  service.send("status/" + details.device + "/mode", {
+  const payload = {
     data: details.value,
-    locked: Boolean(details.value)
-  });
-  service.send("status/" + details.device + "/mode/" + details.value, {
-    data: details.value,
-    locked: Boolean(details.value)
-  });
+    locked: Boolean(details.value),
+    timestamp: new Date()
+  };
+  service.send("status/" + details.device + "/mode", payload);
+  service.send("status/" + details.device + "/mode/" + details.value, payload);
 });
 
 service.on("message", (topic, data) => {
