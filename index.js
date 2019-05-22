@@ -33,7 +33,6 @@ service.on("message", (topic, data) => {
 
   switch (action) {
     case "activate":
-      console.log(JSON.stringify(data));
       if (data) {
         zway.lock(device);
       } else {
