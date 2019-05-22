@@ -1,6 +1,6 @@
 {
   "name": "zway-lock-mqtt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "MQTT API for lock control of Z-Wave lock using a ZWay controller",
   "main": "index.js",
   "scripts": {
