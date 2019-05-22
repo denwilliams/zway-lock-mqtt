@@ -149,9 +149,20 @@ exports.create = config => {
     });
   }
 
+  function refreshAll() {
+    devices.forEach(d => {
+      const device = deviceApi.getDevice(d, 98);
+      device.DoorLock.refresh();
+    });
+  }
+
   // There would be another way to get this on update,
   // this hack will do for now. Emit every hour.
   setInterval(emitBattery, 60 * 60 * 1000);
+
+  // Hack: Sometimes door lock state stays stale for ages in ZWay.
+  // Seem to need to run a Get() to fix it.
+  setInterval(refreshAll, 30 * 60 * 1000);
 
   devices.forEach(d => {
     // deviceApi.on(d, "*", "*", data => {
