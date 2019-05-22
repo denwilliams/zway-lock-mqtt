@@ -168,7 +168,7 @@ exports.create = config => {
       // for a long while after the alarm is received. Get seems to fix it.
       // Maybe want to debounce this.
       const device = deviceApi.getDevice(d, 98);
-      device.refresh();
+      device.DoorLock.refresh();
     });
 
     deviceApi.on(d, 98, "mode", data => {
