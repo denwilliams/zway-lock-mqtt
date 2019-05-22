@@ -139,6 +139,20 @@ exports.create = config => {
 
   deviceApi.poll(1000);
 
+  function emitBattery() {
+    devices.forEach(d => {
+      const device = deviceApi.getDevice(d, 128);
+      e.emit("battery", {
+        value: parseFloat(device.Battery.get("last")),
+        device: d
+      });
+    });
+  }
+
+  // There would be another way to get this on update,
+  // this hack will do for now. Emit every hour.
+  setInterval(emitBattery, 60 * 60 * 1000);
+
   devices.forEach(d => {
     // deviceApi.on(d, "*", "*", data => {
     //   console.log("event data:", JSON.stringify(data));
@@ -193,6 +207,9 @@ exports.create = config => {
     },
     onMode(fn) {
       e.on("mode", fn);
+    },
+    onBattery(fn) {
+      e.on("battery", fn);
     }
     // removeListener: e.removeListener.bind(e)
   };

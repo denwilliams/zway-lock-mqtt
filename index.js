@@ -26,6 +26,14 @@ zway.onMode(details => {
   service.send("status/" + details.device + "/mode/" + details.value, payload);
 });
 
+zway.onBattery(details => {
+  const payload = {
+    value: details.value,
+    timestamp: new Date()
+  };
+  service.send("status/" + details.device + "/battery", payload);
+});
+
 service.on("message", (topic, data) => {
   const [set, device, action] = topic.split("/");
 
