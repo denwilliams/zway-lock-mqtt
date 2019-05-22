@@ -32,6 +32,14 @@ service.on("message", (topic, data) => {
   if (set !== "set") return;
 
   switch (action) {
+    case "activate":
+      console.log(JSON.stringify(data));
+      if (data) {
+        zway.lock(device);
+      } else {
+        zway.unlock(device);
+      }
+      break;
     case "lock":
       zway.lock(device);
       break;
