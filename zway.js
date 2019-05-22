@@ -163,6 +163,12 @@ exports.create = config => {
       const { major, minor } = getMajorMinor(data.data);
       // console.log(`EVENT ${data.device} ${JSON.stringify(details)}`);
       e.emit("alarm", { major, minor, alarmType, level, device: data.device });
+
+      // Bit of an unelegant way to do this, but data seems to stay stale
+      // for a long while after the alarm is received. Get seems to fix it.
+      // Maybe want to debounce this.
+      const device = deviceApi.getDevice(d, 98);
+      device.refresh();
     });
 
     deviceApi.on(d, 98, "mode", data => {
